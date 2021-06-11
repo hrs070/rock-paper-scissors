@@ -24,14 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector("h3").innerText = result;
                 document.getElementById("user-wins").innerText = `User Win Count ${userWinCount}`;
                 document.getElementById("computer-wins").innerText = `Computer Win Count ${computerWinCount}`;
-                console.log([userInput, computerInput, result, i]);
 
-                if (userWinCount > computerWinCount) {
-                    document.querySelector("h2").innerText = `Congratulations! You are the winner.`;
-                } else if (computerWinCount > userWinCount) {
-                    document.querySelector("h2").innerText = `You lost!! Try Again!`;
-                } else {
-                    document.querySelector("h2").innerText = `Good try, but it's a draw!`;
+                if (i == 5) {
+                    if (userWinCount > computerWinCount) {
+                        document.querySelector("h2").innerText = `Congratulations! You are the winner.`;
+                    } else if (computerWinCount > userWinCount) {
+                        document.querySelector("h2").innerText = `You lost!! Try Again!`;
+                    } else {
+                        document.querySelector("h2").innerText = `Good try, but it's a draw!`;
+                    }
                 }
 
 
