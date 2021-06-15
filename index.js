@@ -1,45 +1,100 @@
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("button").addEventListener("click", function () {
-        let result = "";
-        let userWinCount = 0;
-        let computerWinCount = 0;
+let main = document.getElementById("main");
 
-        for (let i = 1; i < 6; i++) {
-            setTimeout(function () {
-                result = "";
-                let computerInput = Math.floor((Math.random() * 3) + 1);
-                let userInput = Number(window.prompt("Enter 1 for Rock, 2 for Paper & 3 for Scissors"));
+let container = document.getElementById("container");
+container.remove();
 
-                if (userInput <= 0 || userInput >= 4) {
-                    userInput = Number(window.prompt("Invalid Input!!!\nEnter 1 for Rock, 2 for Paper & 3 for Scissors"));
-                } else if (userInput === computerInput) {
-                    result += "It's a Tie !!!";
-                } else if ((userInput === 1 && computerInput === 2) || (userInput === 2 && computerInput === 3) || (userInput === 3 && computerInput === 1)) {
-                    result += "You Lose";
-                    computerWinCount += 1;
-                } else if ((userInput === 1 && computerInput === 3) || (userInput === 2 && computerInput === 1) || (userInput === 3 && computerInput === 2)) {
-                    result += "You Win";
-                    userWinCount += 1;
+let choices = ["rock", "paper", "scissors"];
+
+let button = document.querySelector(".button");
+button.addEventListener("click", () => {
+    main.appendChild(container);
+    button.remove();
+
+    let playerWinCount = 0;
+    let computerWinCount = 0;
+    let gameRound = 0;
+    let finalResult = "";
+
+    let computerRock = document.getElementById("computer-rock");
+    let computerPaper = document.getElementById("computer-paper");
+    let computerScissors = document.getElementById("computer-scissors");
+
+
+    let playerHands = document.querySelectorAll(".player-hand");
+    playerHands.forEach(hand => {
+        hand.addEventListener("click", (e) => {
+            //player selection
+            let playerChoice = e.target.getAttribute("value");
+            console.log(playerChoice);
+
+            //computer selection
+            let randomChoice = Math.floor(Math.random() * 3);
+            let computerChoice = choices[randomChoice];
+            console.log(computerChoice);
+
+            //winner logic
+            let result = "";
+            if (playerChoice === computerChoice) {
+                result += "It's a draw.";
+                gameRound++;
+            } else if ((playerChoice === "rock" && computerChoice === "scissors") || (playerChoice === "paper" && computerChoice === "rock") || (playerChoice === "scissors" && computerChoice === "paper")) {
+                playerWinCount++;
+                result = "player wins";
+                gameRound++;
+            } else if ((playerChoice === "rock" && computerChoice === "paper") || (playerChoice === "paper" && computerChoice === "scissors") || (playerChoice === "scissors" && computerChoice === "rock")) {
+                computerWinCount++;
+                result = "computer wins";
+                gameRound++;
+            }
+
+            document.querySelector("#player-win-count").textContent = `Player win count : ${playerWinCount}`;
+            document.querySelector("#computer-win-count").textContent = `Computer win count : ${computerWinCount}`;
+            document.querySelector("h4").textContent = result;
+
+            if (gameRound >= 5) {
+                if (playerWinCount > computerWinCount) {
+                    finalResult = "You won the game";
+                } else if (computerWinCount > playerWinCount) {
+                    finalResult = "Computer won the game";
+                } else {
+                    finalResult = "It's a draw";
                 }
-                document.querySelector("h3").innerText = `Round ${i}: ${result}`;
-                document.getElementById("user-wins").innerText = `User Win Count ${userWinCount}`;
-                document.getElementById("computer-wins").innerText = `Computer Win Count ${computerWinCount}`;
 
-                if (i == 5) {
-                    if (userWinCount > computerWinCount) {
-                        document.querySelector("h2").innerText = `Congratulations! You are the winner.`;
-                    } else if (computerWinCount > userWinCount) {
-                        document.querySelector("h2").innerText = `You lost!! Try Again!`;
-                    } else {
-                        document.querySelector("h2").innerText = `Good try, but it's a draw!`;
-                    }
-                }
+                let heading = document.querySelector("h2");
+                heading.textContent = finalResult;
+                container.remove();
+
+                let playAgain = document.createElement("button");
+                playAgain.textContent = "Play Again";
+                playAgain.classList.add("button");
+                main.appendChild(playAgain);
+                playAgain.addEventListener("click", () => {
+                    location.reload();
+                })
+            }
+
+            // //player selection animation
+            // hand.classList.add("selected");
+            // //computer selection animation
+            // if (computerChoice === "rock") {
+            //     computerRock.classList.add("selected");
+            // } else if (computerChoice === "paper") {
+            //     computerPaper.classList.add("selected");
+            // } else if (computerChoice === "scissors") {
+            //     computerScissors.classList.add("selected");
+            // }
+
+            // //removing all animations
+            // let selectedHands = document.querySelectorAll("i");
+            // selectedHands.forEach(hand => {
+            //     hand.addEventListener("transitionend", () => {
+            //         hand.classList.remove("selected");
+            //         console.log("transition end");
+            //     })
+            // })
+
+        })
+    });
 
 
-            }, 100)
-
-
-        }
-
-    })
-})
+});

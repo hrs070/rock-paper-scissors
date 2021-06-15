@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  text-align: center;
+  color: #ffc107;
+  background-color: #343a40;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #7952b3;
+  color: #fff;
+}
+
+.hand {
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #6536ac;
+  background-color: #6536ac;
+}
+
+#container-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.selected {
+  transform: scale(1.1);
+  border: 1px solid #ffc107;
+}
+.player-hand:hover {
+  transform: scale(1.1);
+  border: 1px solid #ffc107;
+}

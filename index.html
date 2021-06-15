@@ -5,24 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/5ee3b24a49.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <h1>Rock Paper Scissors</h1>
-    <h2></h2>
-    <h3></h3>
-    <div id="wins-count">
-        <div>
-            <h4 id="user-wins"></h4>
+
+    <div id="main">
+        <h2>Winner gets decided in 5 rounds</h2>
+
+        <div id="container">
+            <div id="container-flex">
+
+                <div id="player">
+                    <h3 id="player-win-count">Player win count : 0</h3>
+                    <i class="fas fa-hand-rock hand player-hand" value="rock"></i>
+                    <i class="fas fa-hand-paper hand player-hand" value="paper"></i>
+                    <i class="fas fa-hand-scissors hand player-hand" value="scissors"></i>
+                </div>
+
+                <div id="computer">
+                    <h3 id="computer-win-count">Computer win count : 0</h3>
+                    <i class="fas fa-hand-rock hand computer-hand" id="computer-rock"></i>
+                    <i class="fas fa-hand-paper hand computer-hand" id="computer-paper"></i>
+                    <i class="fas fa-hand-scissors hand computer-hand" id="computer-scissors"></i>
+                </div>
+
+            </div>
+            <h4></h4>
         </div>
-        <div>
-            <h4 id="computer-wins"></h4>
-        </div>
+        <button class="button"><em>Play !</em></button>
     </div>
 
-    <button id="button">Play</button>
     <script src="index.js"></script>
 </body>
 
